@@ -222,7 +222,7 @@ console.log(getTotalReviewCount(book));
 
 //MAP METHOD ------------------------------------------------------------------------------------
 
-function getTotalReviewCount(book) {
+/*function getTotalReviewCount(book) {
   const goodread = book.reviews.goodreads.reviewsCount;
   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
   librarything;
@@ -243,3 +243,71 @@ const essentialData = books.map((book) => ({
 }));
 essentialData;
 //MAP METHOD ------------------------------------------------------------------------------------
+//FILTER METHOD------------------------------------------------------------------------------------
+
+const longBooksWithMovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+longBooksWithMovie;
+
+const adventureBooks = books
+  .filter(
+    (book) =>
+      book.genres.includes("adventure") && ((book) => book.hasMovieAdaptation)
+  )
+  .map((book) => book.title);
+adventureBooks;
+//FILTER METHOD------------------------------------------------------------------------------------
+//Reduce METHOD------------------------------------------------------------------------------------
+
+const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
+pagesAllBooks;
+//Reduce METHOD------------------------------------------------------------------------------------
+//Sort Method--------------------------------------------------------------------------------------
+const arr = [3, 7, 1, 9, 6];
+const sorted = arr.slice().sort((a, b) => a - b);
+sorted;
+arr;
+
+const sortedByPges = books.slice().sort((a, b) => b.pages + a.pages);
+sortedByPges;
+//Sort Method--------------------------------------------------------------------------------------
+//Working with imutable arrays--------------------------------------------------------------------------------------
+
+//1)Add element to an array;
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the chamber of secrets ",
+  author: "J.K.Rowling",
+};
+
+const booksAfterApp = [...books, newBook];
+booksAfterApp;
+
+//2)delete elements from an array
+
+const booksAfterDelete = booksAfterApp.filter((book) => book.id !== 3);
+booksAfterDelete;
+
+//3) Update element in the array ;
+
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+booksAfterUpdate;
+
+//Working with imutable arrays--------------------------------------------------------------------------------------
+*/
+//Asyncronous JS: Promises--------------------------------------------------------------------------------------
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+
+  return data;
+}
+const todos = getTodos();
+console.log(todos);
+
+console.log("jonas");
