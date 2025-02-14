@@ -2,30 +2,62 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+function SkillData({ skillStule, skillName, skillEmojy }) {
+  return (
+    <div className="skill">
+      <p style={{ background: skillStule }}>
+        {skillName}
+        {skillEmojy}
+      </p>
+    </div>
+  );
+}
+
 function DeveloperCard(props) {
   console.log(props);
   return (
     <>
       <div className="bigDiv">
-        <img src={props.Photo} alt="card" />
+        <img className="avatar" src={props.Photo} alt="card" />
         <div className="seconddiv">
           <h1>{props.Name}</h1>
           <p className="description">{props.Description}</p>
         </div>
-        <div className="minidiv">
-          <p className="p1">HTML+CSS</p>
-          <p className="p2">JavaScript</p>
-
-          <p className="p3">React</p>
-          <p className="p4">Web Design</p>
-
-          <p className="p5">Git and GitHub</p>
-          <p className="p6">Prosta crutoi</p>
+        <div>
+          <div className="firstskill">
+            <SkillData
+              skillName="HTML + CSS"
+              skillEmojy="💪"
+              skillStule="blue"
+            />
+            <SkillData
+              skillName="HTML + CSS"
+              skillEmojy="💪"
+              skillStule="blue"
+            />
+          </div>
+          <div className="secondskill">
+            <SkillData skillName="React" skillEmojy="💪" skillStule="red" />
+            <SkillData skillName="React" skillEmojy="💪" skillStule="red" />
+          </div>
+          <div className="thirdskill">
+            <SkillData
+              skillName="Web-design"
+              skillEmojy="💪"
+              skillStule="yellow"
+            />
+            <SkillData
+              skillName="Web-design"
+              skillEmojy="💪"
+              skillStule="yellow"
+            />
+          </div>
         </div>
       </div>
     </>
   );
 }
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
