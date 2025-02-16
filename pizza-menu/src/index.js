@@ -50,7 +50,6 @@ const pizzaData = [
 function App() {
   return (
     <div className="container">
-      <h1>Hello React!!!</h1>
       <Header />
       <Menu />
       <Footer />
@@ -59,10 +58,9 @@ function App() {
 }
 
 function Header() {
-  const style = {};
   return (
     <header className="header">
-      <h1 style={style}>Fast React Pizza Co.</h1>
+      <h1>Fast React Pizza Co.</h1>
     </header>
   );
 }
@@ -74,12 +72,19 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu </h2>
+
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        <>
+          <p>
+            Authentic Italian cusine. 6 creative dishes to choose from . All
+            from our stone oven, all organic, all delicious
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p> Were still working on our menu, please come later </p>
       )}
@@ -99,17 +104,18 @@ function Menu() {
     </main>
   );
 }
-
+//if (pizzaObj.soldOut) return null;
 function Pizza({ pizzaObj }) {
   console.log(pizzaObj);
-  if (pizzaObj.soldOut) return null;
+
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name}></img>
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price + 3}</span>
+
+        <span> {pizzaObj.soldOut ? "SOLD OUT " : pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -158,4 +164,5 @@ root.render(
 );
 /*App->
 Header  Menu   Footer
-        Pizza    Order*/
+        Pizza    Order
+        Authentic Italian cusine. 6 creative dishes to choose from . All from our stone oven, all organic, all delicious*/
