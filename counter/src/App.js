@@ -7,31 +7,50 @@ export default function App() {
   const actualdate = new Date();
   actualdate.setDate(date.getDate() + count);
 
-  function handleStepNext() {
-    setStep((s) => s + 1);
-  }
-  function handleStepPrevious() {
-    setStep((s) => s - 1);
-  }
   function handlePrevious() {
     setCount((c) => c - step);
   }
   function handleNext() {
     setCount((c) => c + step);
   }
+  function handleChange(e) {
+    const changeImput = Number(e.target.value);
+    setCount(changeImput);
+  }
+  function handleRange(e) {
+    const changeRange = Number(e.target.value);
+    setStep(changeRange);
+  }
+  function resetAll(e) {
+    setCount((c) => 0);
+    setStep((s) => 1);
+  }
 
   return (
     <div className="divMare">
       <div className="div1">
-        <button onClick={handleStepPrevious}>-</button>
+        <input
+          type="range"
+          value={step}
+          onChange={handleRange}
+          min="0"
+          max="10"
+        ></input>
+
         <h1>{step}</h1>
-        <button onClick={handleStepNext}>+</button>
       </div>
       <div className="div1">
         <button onClick={handlePrevious}>-</button>
-        <h1>{count}</h1>
+        <h1>
+          <input type="text" value={count} onChange={handleChange}></input>
+        </h1>
         <button onClick={handleNext}>+</button>
       </div>
+      {count !== 0 || step !== 1 ? (
+        <div>
+          <button onClick={resetAll}>Reset</button>
+        </div>
+      ) : null}
       <h1>
         {count < 0 ? (
           <p>
