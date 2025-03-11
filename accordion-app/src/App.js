@@ -20,40 +20,36 @@ const faqs = [
 ];
 
 export default function App() {
-  const [selectedItem, setSelectedItem] = useState(null);
-  function selectedItems(id) {
-    setSelectedItem(id !== selectedItem ? id : null);
-  }
   return (
     <div>
-      <Accordion onSelectedItems={selectedItems} data={faqs} />
+      <Accordion data={faqs} />
     </div>
   );
 }
-function Accordion({ data, selectedItems }) {
+function Accordion({ data }) {
   return (
     <div className="accordion">
       {data.map((el, i) => (
-        <AccordionItem
-          selectedItems={selectedItems}
-          title={el.title}
-          text={el.text}
-          num={i}
-          key={el.id}
-        />
+        <AccordionItem title={el.title} text={el.text} num={i} id={el.id} />
       ))}{" "}
     </div>
   );
 }
-function AccordionItem({ num, title, text, selectedItems, key }) {
+function AccordionItem({ num, title, text, id }) {
+  const [selectedItem, setSelectedItem] = useState(false);
+
+  function selectedItems() {
+    setSelectedItem((a) => !a);
+  }
   return (
     <div className="item">
-      <p className="number">{num < 9 ? `0${num + 1}` : num + 1}</p>
-      <p className="title">{title}</p>
-      <p onClick={() => selectedItems(key)} className="icon">
-        -
+      <p onClick={selectedItems} className="number">
+        {selectedItem ? "-" : "+"}
       </p>
-      <div className="content-box">{key === selectedItems ? text : ""}</div>
+      <p className="title">{title}</p>
+
+      <p className="icon"></p>
+      {selectedItem && <div className="content-box">{text}</div>}
     </div>
   );
 }
