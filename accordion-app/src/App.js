@@ -43,12 +43,13 @@ function AccordionItem({ num, title, text, id }) {
   }
   return (
     <div className="item">
-      <p onClick={selectedItems} className="number">
-        {selectedItem ? "-" : "+"}
-      </p>
+      <p className="number">{num}</p>
+
       <p className="title">{title}</p>
 
-      <p className="icon"></p>
+      <p className="icon" onClick={selectedItems}>
+        {selectedItem ? "-" : "+"}
+      </p>
       {selectedItem && <div className="content-box">{text}</div>}
     </div>
   );
